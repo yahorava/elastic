@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Elastic Client</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<h1>Welcome</h1>
+
+<div th:if="${message}">
+    <h2 th:text="${message}"/>
+</div>
+
+<div>
+    <form method="post" enctype="multipart/form-data" action="/upload">
+        <table>
+            <tr><td>File to upload:</td><td><input type="file" name="file" /></td></tr>
+            <tr><td></td><td><input type="submit" value="Upload" /></td></tr>
+        </table>
+    </form>
+</div>
+
+<div>
+    <ul>
+        <li th:each="file : ${files}">
+            <a th:href="${file}" th:text="${file}" />
+        </li>
+    </ul>
+</div>
+
+<div>
+<form action="#" th:action="@{/index}" th:object="${indexForm}" method="post">
+    File name (the file must be uploaded to the server):
+    <br/>
+    <input type="text" th:field="*{path}" />
+    <br/>
+    Index:
+    <br/>
+    <input type="text" th:field="*{index}" />
+    <br/>
+    Type:
+    <br/>
+    <input type="text" th:field="*{type}" />
+    <br/>
+    <input type="submit" value="Apply" class=""/>
+    <br/>
+
+    <div th:if="${created}">
+        <p th:text="${created}"/>
+    </div>
+    <div th:if="${updated}">
+        <p th:text="${updated}"/>
+    </div>
+</form>
+</div>
+</body>
+</html>
